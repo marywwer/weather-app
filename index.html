@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Погода</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <div>
+        <h1 class="app__title">Погода</h1>
+        <p class="app__subtitle">Добавляй виджеты по городам или координатам</p>
+      </div>
+      <div class="app__meta">
+        <span id="app-date"></span>
+      </div>
+    </header>
+
+    <main class="app__main">
+      <!-- Блок поиска по городу -->
+      <section class="panel">
+        <h2 class="panel__title">Погода по названию города</h2>
+        <form id="city-form" class="form">
+          <label class="form__field">
+            <span>Город</span>
+            <input
+              id="city-input"
+              name="city"
+              type="text"
+              placeholder="Например, Москва"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <button type="submit" class="btn">Добавить виджет</button>
+          <div id="city-error" class="form__error"></div>
+        </form>
+      </section>
+
+      <!-- Блок поиска по координатам + карта -->
+      <section class="panel">
+        <h2 class="panel__title">Погода по широте и долготе</h2>
+        <form id="coords-form" class="form form--inline">
+          <label class="form__field form__field--inline">
+            <span>Широта</span>
+            <input
+              id="lat-input"
+              name="lat"
+              type="text"
+              placeholder="57.25"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="form__field form__field--inline">
+            <span>Долгота</span>
+            <input
+              id="lon-input"
+              name="lon"
+              type="text"
+              placeholder="58.75"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <button type="submit" class="btn btn--secondary">Добавить виджет + карта</button>
+        </form>
+        <div id="coords-error" class="form__error"></div>
+      </section>
+
+      <!-- Контейнер для всех виджетов погоды -->
+      <section class="widgets">
+        <h2 class="widgets__title">Мои виджеты</h2>
+        <div id="widgets-container" class="widgets__grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="weather-card-template">
+    <article class="card">
+      <button class="card__close" type="button" title="Удалить виджет">×</button>
+      <div class="card__header">
+        <div>
+          <h3 class="card__city"></h3>
+          <p class="card__location"></p>
+        </div>
+        <div class="card__icon-wrap">
+          <span class="card__icon" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <div class="card__temp-block">
+          <div class="card__temp-main">
+            <span class="card__temp-value"></span>
+            <span class="card__temp-unit">°C</span>
+          </div>
+          <p class="card__condition"></p>
+        </div>
+
+        <dl class="card__details">
+          <div class="card__detail-row">
+            <dt>Ощущается как</dt>
+            <dd class="card__feels-like"></dd>
+          </div>
+          <div class="card__detail-row">
+            <dt>Ветер</dt>
+            <dd class="card__wind"></dd>
+          </div>
+          <div class="card__detail-row">
+            <dt>Влажность</dt>
+            <dd class="card__humidity"></dd>
+          </div>
+          <div class="card__detail-row">
+            <dt>Местное время</dt>
+            <dd class="card__local-time"></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="card__footer">
+        <small class="card__coords"></small>
+      </div>
+
+      <div class="card__map-wrap"></div>
+    </article>
+  </template>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
